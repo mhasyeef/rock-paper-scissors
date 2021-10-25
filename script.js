@@ -1,71 +1,86 @@
-const choices = ['Rock', 'Paper', 'Scissors'];  //computer choice array
-    let score = 0;
-    let playerScore = 0;
-    let computerScore = 0;
+const computerChoice = ['rock', 'paper', 'scissors'];  //computer choice array
+let playerScore = 0;
+let computerScore = 0;
+const emojis = document.querySelectorAll('choice');
+const retryBtn = document.getElementById('retryBtn');
 
-    //computer choice is randomized based on array choices
-    function computerPlay(){
-        const randomChoice = Math.floor(Math.random() * choices.length);
-        return choices[randomChoice];
+//computer choice is randomized based on array choices
+function computerPlay(){
+    const randomChoice = Math.floor(Math.random() * computerChoice.length);
+    return computerChoice[randomChoice];
+}
+
+
+retryBtn.addEventListener('click', restartGame);
+function restartGame(){
+    window.location.reload();
+};
+
+const selections = document.querySelectorAll('.choice');
+selections.forEach(selection => selection.addEventListener('click', game));
+
+function game(e){
+    const player = e.target.id;
+    const computer = computerPlay();
+
+    results = playRound(player, computer);
+
+    //results stored in the "result" variable
+    let result = results;
+
+    //displayes the score
+    document.getElementById("your-score").textContent = playerScore;
+    document.getElementById("computer-score").textContent = computerScore;
+
+    //displays the choices
+    document.getElementById("your-choice").textContent = "You chose: "+ player;
+    document.getElementById("computer-choice").textContent = "Computer chose: "+ computer;
+
+    //displays the result
+    document.getElementById("results").textContent = result;
+
+    if(computerScore >= 5){
+        document.getElementById("results").textContent = "The computer has won this round. Try again?"
+        retryBtn.style.visibility = "visible";  //displays the "try again" button after win
+    }else if(playerScore >= 5){
+        document.getElementById("results").textContent = "Congratulations! You have won this round. Try again?"
+        retryBtn.style.visibility = "visible";  //displays the "try again" button after win
     }
 
-    //winner or loser is determined based on player and computer choice
-    function playRound(playerSelection, computerSelection){ 
+    return results;   
+}
 
-        if(playerSelection === "PAPER"){
-            if(computerSelection === "Paper"){
-                console.log("It's a draw!")
-            }else if(computerSelection === "Rock"){
-                playerScore += 1;
-                console.log("You Win! Paper beats rock!")
-            }else if(computerSelection === "Scissors"){
-                computerScore += 1;
-                console.log("You lose! Scissors beat Rock!")
-            }
-        }else if(playerSelection === "ROCK"){
-            if(computerSelection === "Paper"){         
-                computerScore += 1;       
-                console.log("You Lose! Paper beats Rock!")
-            }else if(computerSelection === "Rock"){
-                console.log("It's a draw!")
-            }else if(computerSelection === "Scissors"){
-                playerScore += 1;
-                console.log("You win! Scissors beat Rock!")
-            }
-        }else if(playerSelection === "SCISSORS"){
-            if(computerSelection === "Paper"){
-                playerScore += 1;
-                console.log("You Win! Scissors beats Paper!")
-            }else if(computerSelection === "Rock"){
-                computerScore += 1;
-                console.log("You lose! Rock beats Scissors!")
-            }else if(computerSelection === "Scissors"){
-                console.log("It's a draw!")
-            }
-        }else{
-            alert("You have entered an invalid choice! Please enter again.");
-            return;
+//determines the winner or loser
+function playRound(playerSelection, computerSelection){
+    if(playerSelection === "paper"){
+        if(computerSelection === "paper"){
+            return "It's a draw!"
+        }else if(computerSelection === "rock"){
+            playerScore += 1;
+            return "You Win! Paper beats rock!"
+        }else if(computerSelection === "scissors"){
+            computerScore += 1;
+            return "You lose! Scissors beat Paper!"
+        }
+    }else if(playerSelection === "rock"){
+        if(computerSelection === "paper"){         
+            computerScore += 1;       
+            return "You Lose! Paper beats Rock!"
+        }else if(computerSelection === "rock"){
+            return "It's a draw!"
+        }else if(computerSelection === "scissors"){
+            playerScore += 1;
+            return "You win! Rock beats Scissors!"
+        }
+    }else if(playerSelection === "scissors"){
+        if(computerSelection === "paper"){
+            playerScore += 1;
+            return "You Win! Scissors beats Paper!"
+        }else if(computerSelection === "rock"){
+            computerScore += 1;
+            return "You lose! Rock beats Scissors!"
+        }else if(computerSelection === "scissors"){
+            return "It's a draw!"
         }
     }
-
-    //loops through 5 rounds of the game with score
-    function game(){
-
-        for(let i = 1; i <= 5; i++){
-            const playerSelectionCase = prompt("Choose Rock, Paper or Scissors"); //user prompt for player choice
-            const playerSelection = playerSelectionCase.toUpperCase();  //allows for case insensitivity
-            console.log("You chose: " + playerSelection);
-
-            const computerSelection = computerPlay();   //calls function for computer choice
-            console.log("Computer chose: " + computerSelection);
-
-            playRound(playerSelection, computerSelection);      //winner and loser is determined per round
-            
-           
-            console.log("Your score is: " + playerScore);
-            console.log("Computer score is: " + computerScore);
-        }
-        return score;
-    }
-
-    game();
+};

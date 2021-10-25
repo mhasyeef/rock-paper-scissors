@@ -1,0 +1,94 @@
+body{
+    background-color: aqua;
+}
+
+.header, h1{
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    margin-top: 1rem;
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+}
+
+.choice {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 5rem;
+    transition: 500ms;
+    margin: 0px 40px 0px 40px ;
+}
+
+.choice:hover{
+    transform: scale(1.2);
+}
+
+.results, .choice-display {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    margin-top: 4rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.results-score {
+    font-size: .8rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.results-display {
+    display: grid;
+    justify-content: center;
+    margin-top: 1em;
+    font-size: 2.5rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.retry{
+    display: grid;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.play{
+    display: grid;
+    justify-content: center;
+}
+
+#retryBtn {
+    font-size: 20px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 50px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+#retryBtn::after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+#retryBtn:hover::after {
+    top: 0px;
+    left: 0px;
+}
+
+  /*https://codepen.io/joebocock/pen/ZEWoMPb*/
