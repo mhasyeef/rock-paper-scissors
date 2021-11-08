@@ -12,15 +12,18 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="header">
-        <h1 id="header">Choose your weapon</h1>
-        
+    <div class="main">
+        <div class="header">
+            <h1 id="header">Choose your weapon</h1>
+            
+        </div>
+        <div class="choices">
+            <button id="rock" class="choice">✊</button>
+            <button id="paper" class="choice">✋</button>
+            <button id="scissors" class="choice">✌️</button>
+        </div>       
     </div>
-    <div class="choices">
-        <button id="rock" class="choice">✊</button>
-        <button id="paper" class="choice">✋</button>
-        <button id="scissors" class="choice">✌️</button>
-    </div>
+    
     <div class="results">
         <div>
             Your Score:
@@ -35,9 +38,11 @@
         <h3 id="your-choice"></h3>
         <h3 id="computer-choice"></h3>
     </div>
+
     <div class="results-display">
         <h3 id="results"></h3>
     </div>
+
     <div class="retry">
         <button id="retryBtn">Try Again</button>
     </div>
